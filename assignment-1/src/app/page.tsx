@@ -5,11 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { quotes } from "@/data/quotes";
 
+
+type Quote = { topic: string; text: string };
+
 export default function Home() {
 
 
   const [topic, setTopic] = useState("");
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState<Quote[]>([]);
 
   const handleSubmit = () => {
     const filtered = quotes
