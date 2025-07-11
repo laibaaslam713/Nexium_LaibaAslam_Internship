@@ -1,5 +1,6 @@
 // import Image from "next/image";
 "use client"; 
+import React from 'react';
 import { useRouter } from 'next/navigation';
 
 
@@ -8,7 +9,8 @@ export default function Home() {
   const router = useRouter();
 
   const handleStart = () => {
-    router.push('/screens/summarizer_form');
+   router.push('/screens/summarizer_form');
+
   };
 
 
