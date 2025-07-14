@@ -66,16 +66,16 @@ export default function SummarizerForm() {
 
       <CardContent className="text-[#ffffff]">
         <div className="flex flex-col md:flex-row justify-between gap-6">
-          {/* English Summary */}
+         
           <div className="flex-1">
             <h2 className="font-bold text-lg mb-2 text-center md:text-left border-b border-white/20 md:border-none">English Summary</h2>
             <p>{summary}</p>
           </div>
 
-          {/* Vertical Divider for desktop */}
+          
           <div className="hidden md:block w-[1px] bg-white/30"></div>
 
-          {/* Urdu Summary */}
+       
           <div className="flex-1">
             <h2 className="font-bold text-lg mb-2 text-center md:text-right border-b border-white/20 md:border-none">Urdu Summary</h2>
             <p className="text-right">{urduSummary}</p>

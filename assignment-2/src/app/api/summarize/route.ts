@@ -4,7 +4,6 @@ import { saveToMongo } from "@/lib/saveToMongo";
 import { saveToSupabase } from "@/lib/saveToSupabase";
 import { translateToUrdu } from "@/lib/translate";
 
-// Basic static summarizer (you can replace it with something better later)
 function summarize(text: string): string {
   return text.split(". ").slice(0, 2).join(". ") + ".";
 }
@@ -24,7 +23,6 @@ export async function POST(req: Request) {
     const summary = summarize(content);
     const urdu = translateToUrdu(summary);
 
-    // Save data to databases
     await saveToMongo(url, content);
     await saveToSupabase(url, summary);
 
