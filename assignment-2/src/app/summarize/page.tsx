@@ -31,10 +31,12 @@ export default function SummarizerForm() {
 
       setSummary(result.english);
       setUrduSummary(result.urdu);
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError("Something went wrong");
+  }
     }
   }
 
