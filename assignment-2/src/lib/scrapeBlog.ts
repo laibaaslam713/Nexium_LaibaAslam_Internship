@@ -1,15 +1,14 @@
-import axios from "axios";
 import * as cheerio from "cheerio";
 
 export async function scrapeBlog(url: string): Promise<string> {
-  const { data } = await axios.get(url);
-  const $ = cheerio.load(data);
+  const res = await fetch(url);
+  const html = await res.text();
+  const $ = cheerio.load(html);
 
-  const paragraphs = $("p")
-    .map((_, el) => $(el).text())
-    .get()
-    .join(" ");
+  let text = "";
+  $("p").each((_, el) => {
+    text += $(el).text() + "\n";
+  });
 
-  return paragraphs.slice(0, 1500) || "No content found.";
+  return text;
 }
-
