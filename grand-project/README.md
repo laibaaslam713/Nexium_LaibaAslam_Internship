@@ -1,6 +1,6 @@
 # Product Requirements Document (PRD)
 
-##  Project Name: AI-Powered Recipe Generator
+###  Project Name: AI-Powered Recipe Generator
 
 ## 1. Overview
 This application enables users to generate cooking recipes based on ingredients they have. It uses AI to generate recipes, allows email-based login, and lets users save favorite recipes. The app provides a clean, responsive UI built using Next.js, Tailwind CSS, ShadCN UI, Supabase, and MongoDB.
@@ -24,15 +24,15 @@ Students
 
 ## 4. Core Features
 
-    ### 1. User Authentication (Magic Link)
+### 1. User Authentication (Magic Link)
        Email-based login (no password).
        Built using Supabase Auth.
        Secure and easy access for users.
 
-    ###2. Ingredient Input
+### 2. Ingredient Input
        Users can input ingredients into a textbox or tag-style input UI.
 
-    ###3. Recipe Generation
+### 3. Recipe Generation
 
         Outputs:
 
@@ -45,7 +45,7 @@ Students
         Estimated cooking time
 
 
-    ###4. Recipe Display
+### 4. Recipe Display
         Neatly structured format showing:
 
         Recipe Title
