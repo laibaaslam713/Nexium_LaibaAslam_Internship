@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Product Requirements Document (PRD)
 
-## Getting Started
+Project Name: AI-Powered Recipe Generator
 
-First, run the development server:
+1. Overview
+This application enables users to generate cooking recipes based on ingredients they have. It uses AI to generate recipes, allows email-based login, and lets users save favorite recipes. The app provides a clean, responsive UI built using Next.js, Tailwind CSS, ShadCN UI, Supabase, and MongoDB.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Goals & Objectives
+Help users create meals using ingredients they already have.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Eliminate the need for traditional search-based recipe hunting.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Enable users to save, view, and reuse recipes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Provide seamless login via magic links (no password hassle).
 
-## Learn More
+3. Target Users
+Home cooks
 
-To learn more about Next.js, take a look at the following resources:
+Busy professionals
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Students
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+4. Core Features
+    1. User Authentication (Magic Link)
+       Email-based login (no password).
+       Built using Supabase Auth.
+       Secure and easy access for users.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    2. Ingredient Input
+       Users can input ingredients into a textbox or tag-style input UI.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    3. Recipe Generation
+
+        Outputs:
+
+        Recipe title
+
+        Ingredient list
+
+        Step-by-step instructions
+
+        Estimated cooking time
+
+
+    4. Recipe Display
+        Neatly structured format showing:
+
+        Recipe Title
+
+        Ingredients
+
+        Steps
+
+        Time & Difficulty
+
+        Responsive layout using ShadCN UI + Tailwind CSS
