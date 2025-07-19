@@ -25,35 +25,38 @@ Students
 ## 4. Core Features
 
 ### 1. User Authentication (Magic Link)
-       Email-based login (no password).
-       Built using Supabase Auth.
-       Secure and easy access for users.
+
+Email-based login (no password).
+Built using Supabase Auth.
+Secure and easy access for users.
 
 ### 2. Ingredient Input
-       Users can input ingredients into a textbox or tag-style input UI.
+
+Users can input ingredients into a textbox or tag-style input UI.
 
 ### 3. Recipe Generation
 
-        Outputs:
+Outputs:
 
-        Recipe title
+Recipe title
 
-        Ingredient list
+Ingredient list
 
-        Step-by-step instructions
+Step-by-step instructions
 
-        Estimated cooking time
+Estimated cooking time
 
 
 ### 4. Recipe Display
-        Neatly structured format showing:
 
-        Recipe Title
+Neatly structured format showing:
 
-        Ingredients
+Recipe Title
 
-        Steps
+Ingredients
 
-        Time & Difficulty
+Steps
 
-        Responsive layout using ShadCN UI + Tailwind CSS
+Time & Difficulty
+
+Responsive layout using ShadCN UI + Tailwind CSS
