@@ -16,7 +16,7 @@ export default function GenerateRecipePage() {
 
 const handleGenerate = async () => {
   setLoading(true);
-  setRecipe(null); // Clear previous result
+  setRecipe(null);
 
   try {
     const response = await fetch("http://localhost:5678/webhook/generate-recipes", {
@@ -33,12 +33,11 @@ const handleGenerate = async () => {
 
     const text = await response.text();
 
-    // Try parsing JSON manually
     let data;
     try {
       data = JSON.parse(text);
     } catch {
-      data = { recipe: text }; // fallback if it's plain text
+      data = { recipe: text }; 
     }
 
     console.log("API Response:", data);
