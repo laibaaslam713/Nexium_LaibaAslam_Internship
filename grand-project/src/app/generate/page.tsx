@@ -1,31 +1,67 @@
 "use client";
 
+import { useState } from "react";
+
 type Recipe = {
   title: string;
-  ingredients: string;
+  ingredients: string[];
   steps: string;
   time: string;
 };
-
-
-import { useState } from "react";
 
 export default function GenerateRecipePage() {
   const [ingredients, setIngredients] = useState("");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleGenerate = async () => {
-    setLoading(true);
-    const res = await fetch("/api/generate", {
+const handleGenerate = async () => {
+  setLoading(true);
+  setRecipe(null); // Clear previous result
+
+  try {
+    const response = await fetch("http://localhost:5678/webhook/generate-recipes", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ ingredients }),
     });
-    const data = await res.json();
-    setRecipe(data);
-    setLoading(false);
-  };
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const text = await response.text();
+
+    // Try parsing JSON manually
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = { recipe: text }; // fallback if it's plain text
+    }
+
+    console.log("API Response:", data);
+
+    const parsed = data.recipe || data.result || "";
+
+   const recipeData = data.recipe;
+
+setRecipe({
+  title: recipeData.title || "Recipe",
+  ingredients: recipeData.ingredients || [],
+  steps: recipeData.steps || "No steps found",
+  time: recipeData.time || "Unknown",
+});
+
+  } catch (error) {
+    console.error("Error generating recipe:", error);
+    alert("Something went wrong while generating recipe. Check console for details.");
+  }
+
+  setLoading(false);
+};
+
 
   return (
     <div className="max-w-2xl mx-auto mt-12 px-4">
@@ -48,7 +84,7 @@ export default function GenerateRecipePage() {
       {recipe && (
         <div className="mt-8 bg-white border p-4 rounded shadow-md">
           <h2 className="text-2xl font-semibold mb-2">{recipe.title}</h2>
-          <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
+          <p><strong>Ingredients:</strong> {recipe.ingredients.join(", ")}</p>
           <p><strong>Steps:</strong> {recipe.steps}</p>
           <p><strong>Time:</strong> {recipe.time}</p>
         </div>
