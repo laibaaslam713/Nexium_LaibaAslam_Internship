@@ -2,6 +2,8 @@
 
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
+import jsPDF from "jspdf";
+
 
 type Recipe = {
   title: string;
@@ -14,6 +16,7 @@ export default function GenerateRecipePage() {
   const [ingredients, setIngredients] = useState("");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(false);
+  
 
   const handleGenerate = async () => {
     if (!ingredients.trim()) {
