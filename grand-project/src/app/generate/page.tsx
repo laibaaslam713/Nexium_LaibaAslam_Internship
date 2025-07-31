@@ -3,11 +3,10 @@
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
 
-
 type Recipe = {
   title: string;
   ingredients: string[];
-  steps: string;
+  steps: string[]; // 🔁 Changed from string to string[]
   time: string;
 };
 
@@ -15,7 +14,6 @@ export default function GenerateRecipePage() {
   const [ingredients, setIngredients] = useState("");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(false);
-  
 
   const handleGenerate = async () => {
     if (!ingredients.trim()) {
@@ -56,42 +54,44 @@ export default function GenerateRecipePage() {
           ingredients: Array.isArray(recipeData.ingredients)
             ? recipeData.ingredients
             : ingredients.split(",").map((i) => i.trim()),
-          steps: recipeData.steps || "No steps provided.",
+          steps: Array.isArray(recipeData.steps)
+            ? recipeData.steps
+            : recipeData.steps?.split("\n") || ["No steps provided."], // 🔁 convert to array if needed
           time: recipeData.time || "Unknown",
         });
       } else {
         const text = await response.text();
 
         // Step 1: Split the response into parts based on headings
-const sections = text.split(/Steps?:/i);
-const ingredientText = sections[0];
-const stepsText = sections[1] || "";
+        const sections = text.split(/Steps?:/i);
+        const ingredientText = sections[0];
+        const stepsText = sections[1] || "";
 
-// Step 2: Extract ingredients from first part
-const ingredients = ingredientText
-  .split(/\r?\n/)
-  .map((line) => line.trim())
-  .filter(
-    (line) => 
-      line &&
-      !/^\*+$/.test(line) &&
-      !/^[\d\-]+\s*$/.test(line) &&
-      !/^Ingredients[:]?$/i.test(line)
-  );
+        // Step 2: Extract ingredients from first part
+        const ingredients = ingredientText
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .filter(
+            (line) =>
+              line &&
+              !/^\*+$/.test(line) &&
+              !/^[\d\-]+\s*$/.test(line) &&
+              !/^Ingredients[:]?$/i.test(line)
+          );
 
-// Step 3: Extract steps from second part
-const steps = stepsText
-  .split(/\r?\n/)
-  .map((line) => line.trim())
-  .filter((line) => line);
+        // Step 3: Extract steps from second part
+        const steps = stepsText
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .filter((line) => line);
 
-// Step 4: Set the recipe properly
-setRecipe({
-  title: "Your AI Recipe",
-  ingredients: ingredients,
-  steps: steps,
-});
-
+        // Step 4: Set the recipe properly
+        setRecipe({
+          title: "Your AI Recipe",
+          ingredients: ingredients,
+          steps: steps, // 🔁 keep as array
+          time: "Unknown",
+        });
       }
     } catch (error) {
       console.error("Error generating recipe:", error);
@@ -107,10 +107,9 @@ setRecipe({
     <>
       <Navbar />
       <div className="w-screen h-screen bg-[linear-gradient(to_right,_#BB9CBE,_#7D4E69)] py-20 px-6 absolute left-0 top-0">
-        {/* Glassy Form Box */}
         <div className="max-w-4xl mx-auto backdrop-blur-sm bg-black/20 p-10 rounded-2xl shadow-2xl mt-10">
           <h1 className="text-4xl font-extrabold mb-6 text-center text-white drop-shadow-md">
-            Crave It, Create It! 
+            Crave It, Create It!
           </h1>
           <p className="font-bold text-2xl mb-6 text-center text-white drop-shadow-md">
             Tell us what you like or have on hand — we’ll create unique recipes and meal plans that fit your taste and lifestyle.
@@ -154,20 +153,14 @@ setRecipe({
                 </div>
               </p>
 
-
               <p>
                 <span className="font-semibold text-gray-700">👨‍🍳 Steps:</span>
                 <div className="mt-2 space-y-1">
-                  {Array.isArray(recipe.steps) ? (
-                    recipe.steps.map((step, index) => (
-                      <div key={index}>{step}</div>
-                    ))
-                  ) : (
-                    <div>{recipe.steps}</div>
-                  )}
+                  {recipe.steps.map((step, index) => (
+                    <div key={index}>{step}</div>
+                  ))}
                 </div>
               </p>
-
 
               {/* <p>
                 <span className="font-semibold text-gray-700">⏱️ Time:</span>{" "}
