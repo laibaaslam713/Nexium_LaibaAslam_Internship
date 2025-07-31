@@ -1,10 +1,10 @@
 "use client";
 
-import { useState} from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -18,11 +18,9 @@ export default function LoginPage() {
       alert("Login failed: " + error.message);
     } else {
       alert("Magic link sent to your email.");
-
-      // Optional: Redirect immediately or after confirmation
       setTimeout(() => {
-        router.push(redirectTo); // Go to /generate or whatever was passed
-      }, 1000); // optional delay for UX
+        router.push(redirectTo);
+      }, 1000);
     }
   };
 
@@ -49,5 +47,13 @@ export default function LoginPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="text-white text-center">Loading login...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }
