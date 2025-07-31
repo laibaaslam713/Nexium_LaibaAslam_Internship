@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
+
 
 const recipes = [
   {
@@ -188,7 +190,7 @@ export default function LandingPage() {
             >
               &times;
             </button>
-            <img
+            <Image
               src={selectedRecipe.image}
               alt={selectedRecipe.title}
               className="w-full h-52 object-cover rounded-lg mb-4"

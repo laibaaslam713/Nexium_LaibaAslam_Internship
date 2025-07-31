@@ -13,7 +13,7 @@ export default function AboutPage() {
   <span className="text-fuchsia-950 font-semibold">Spoonify</span> turns that everyday confusion into delicious inspiration.  
   Just tell us what ingredients you have — no matter how random — and let our intelligent recipe generator craft the perfect dish for you.
   <br /><br />
-  ✨ Whether you're a beginner, a student living on a budget, or just someone trying to avoid food waste,  
+  ✨ Whether you are a beginner, a student living on a budget, or just someone trying to avoid food waste,  
   <span className="text-fuchsia-950 font-semibold">Spoonify</span> is built for **you**.
   <br /><br />
   With <span className="text-fuchsia-950 font-semibold">Spoonify</span>, **you cook smarter, faster, and tastier**.

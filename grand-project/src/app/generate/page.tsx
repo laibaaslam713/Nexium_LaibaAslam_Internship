@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
-import jsPDF from "jspdf";
 
 
 type Recipe = {
