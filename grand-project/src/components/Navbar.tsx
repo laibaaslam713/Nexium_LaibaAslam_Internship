@@ -5,9 +5,12 @@ import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { FaUserCircle } from "react-icons/fa";
 import { Button } from "./ui/button";
+import { User } from "@supabase/supabase-js";
+
 
 export default function Navbar() {
-  const [user, setUser] = useState(null);
+
+  const [user, setUser] = useState<User | null>(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
