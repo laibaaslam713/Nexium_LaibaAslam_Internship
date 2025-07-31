@@ -128,7 +128,18 @@ const recipes = [
 export default function LandingPage() {
   const { data: session } = useSession();
   const router = useRouter();
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  // const [selectedRecipe, setSelectedRecipe] = useState(null);
+
+  type RecipeType = {
+  id: number;
+  title: string;
+  image: string;
+  short: string;
+  full: string;
+};
+
+const [selectedRecipe, setSelectedRecipe] = useState<RecipeType | null>(null);
+
 
   const handleGetStarted = () => {
     if (session) {
