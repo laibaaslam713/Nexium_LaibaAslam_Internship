@@ -204,6 +204,8 @@ const [selectedRecipe, setSelectedRecipe] = useState<RecipeType | null>(null);
               src={selectedRecipe.image}
               alt={selectedRecipe.title}
               className="w-full h-52 object-cover rounded-lg mb-4"
+              width={400}
+  height={200}
             />
             <h2 className="text-2xl font-bold text-purple-800 mb-3">{selectedRecipe.title}</h2>
             <pre className="text-sm text-white whitespace-pre-wrap">{selectedRecipe.full}</pre>

@@ -14,7 +14,6 @@ export default function Navbar() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Load user on page mount
   useEffect(() => {
     const loadUser = async () => {
       const { data, error } = await supabase.auth.getUser();
@@ -23,7 +22,6 @@ export default function Navbar() {
 
     loadUser();
 
-    // Subscribe to auth changes
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user || null);
     });
@@ -58,7 +56,7 @@ export default function Navbar() {
           <div className="relative" ref={dropdownRef}>
             <FaUserCircle
               size={28}
-              className="cursor-pointer text-white hover:text-fuchsia-500"
+              className="cursor-pointer text-white hover:text-fuchsia-950"
               onClick={toggleDropdown}
             />
             {isDropdownOpen && (
@@ -80,7 +78,7 @@ export default function Navbar() {
           </div>
         ) : (
           <Link href="/login">
-            <Button className="border-2 border-white bg-transparent hover:border-fuchsia-950 hover:text-fuchsia-950 text-white transition">
+            <Button className="border-2 border-white bg-transparent hover:border-fuchsia-950 hover:text-fuchsia-950 hover:bg-transparent text-white transition">
               Sign In
             </Button>
           </Link>

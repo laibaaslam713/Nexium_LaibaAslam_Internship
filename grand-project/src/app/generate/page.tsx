@@ -2,11 +2,13 @@
 
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
+import { useRef } from "react";
+
 
 type Recipe = {
   title: string;
   ingredients: string[];
-  steps: string[]; // 🔁 Changed from string to string[]
+  steps: string[]; 
   time: string;
 };
 
@@ -14,6 +16,8 @@ export default function GenerateRecipePage() {
   const [ingredients, setIngredients] = useState("");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(false);
+  const recipeRef = useRef<HTMLDivElement | null>(null);
+
 
   const handleGenerate = async () => {
     if (!ingredients.trim()) {
@@ -56,18 +60,20 @@ export default function GenerateRecipePage() {
             : ingredients.split(",").map((i) => i.trim()),
           steps: Array.isArray(recipeData.steps)
             ? recipeData.steps
-            : recipeData.steps?.split("\n") || ["No steps provided."], // 🔁 convert to array if needed
+            : recipeData.steps?.split("\n") || ["No steps provided."], 
           time: recipeData.time || "Unknown",
         });
+        setTimeout(() => {
+  recipeRef.current?.scrollIntoView({ behavior: "smooth" });
+}, 100);
+
       } else {
         const text = await response.text();
 
-        // Step 1: Split the response into parts based on headings
         const sections = text.split(/Steps?:/i);
         const ingredientText = sections[0];
         const stepsText = sections[1] || "";
 
-        // Step 2: Extract ingredients from first part
         const ingredients = ingredientText
           .split(/\r?\n/)
           .map((line) => line.trim())
@@ -79,19 +85,21 @@ export default function GenerateRecipePage() {
               !/^Ingredients[:]?$/i.test(line)
           );
 
-        // Step 3: Extract steps from second part
         const steps = stepsText
           .split(/\r?\n/)
           .map((line) => line.trim())
           .filter((line) => line);
 
-        // Step 4: Set the recipe properly
         setRecipe({
           title: "Your AI Recipe",
           ingredients: ingredients,
-          steps: steps, // 🔁 keep as array
+          steps: steps, 
           time: "Unknown",
         });
+        setTimeout(() => {
+  recipeRef.current?.scrollIntoView({ behavior: "smooth" });
+}, 100); 
+
       }
     } catch (error) {
       console.error("Error generating recipe:", error);
@@ -134,8 +142,11 @@ export default function GenerateRecipePage() {
           </div>
         </div>
 
-        {/* Recipe Output Section */}
         {recipe && (
+          <div
+    ref={recipeRef}
+    className="mt-10 mb-10 max-w-4xl mx-auto overflow-hidden"
+  >
           <div className="mt-50 mb-50 max-w-4xl mx-auto overflow-hidden rounded-2xl shadow-2xl border border-gray-300 bg-white">
             <div className="bg-gray-100 px-6 py-4 border-b border-gray-300">
               <h2 className="text-2xl font-bold text-fuchsia-950">
@@ -144,29 +155,30 @@ export default function GenerateRecipePage() {
             </div>
 
             <div className="p-8 text-gray-800 text-lg leading-relaxed mb-4">
-              <p>
-                <span className="font-semibold text-gray-700">🧂 Ingredients:</span>
-                <div className="mt-2 space-y-1">
-                  {recipe.ingredients.map((ingredient, index) => (
-                    <div key={index}>{ingredient}</div>
-                  ))}
-                </div>
-              </p>
+ 
+  <div className="mb-4">
+    <span className="font-semibold text-gray-700">🧂 Ingredients:</span>
+    <div className="mt-2 space-y-1">
+      {recipe.ingredients.map((ingredient, index) => (
+        <div key={index}>{ingredient}</div>
+      ))}
+    </div>
+  </div>
 
-              <p>
-                <span className="font-semibold text-gray-700">👨‍🍳 Steps:</span>
-                <div className="mt-2 space-y-1">
-                  {recipe.steps.map((step, index) => (
-                    <div key={index}>{step}</div>
-                  ))}
-                </div>
-              </p>
+  <div className="mb-4">
+    <span className="font-semibold text-gray-700">👨‍🍳 Steps:</span>
+    <div className="mt-2 space-y-1">
+      {recipe.steps.map((step, index) => (
+        <div key={index}>{step}</div>
+      ))}
+    </div>
+  </div>
 
-              {/* <p>
-                <span className="font-semibold text-gray-700">⏱️ Time:</span>{" "}
-                {recipe.time}
-              </p> */}
-            </div>
+  {/* <div className="mb-4">
+    <span className="font-semibold text-gray-700">⏱️ Time:</span> {recipe.time}
+  </div> */}
+</div>
+          </div>
           </div>
         )}
       </div>
