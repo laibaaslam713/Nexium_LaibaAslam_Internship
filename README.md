@@ -7,7 +7,7 @@ This repository contains two separate projects developed using next.js, ShadCN U
 
 - [Quote Generator (Assignment 1)](https://nexium-laiba-aslam-assign1.vercel.app/)
 - [Blog Summariser (Assignment 2)](https://nexium-laiba-aslam-internship.vercel.app/)
-- [AI Recipe Generator(Assignment 3)](https://nexium-laiba-aslam-internship-4p81.vercel.app/)
+- [AI Recipe Generator(Assignment 3)](https://nexium-laiba-aslam-internship-zj2e.vercel.app/)
 
 ---
 
