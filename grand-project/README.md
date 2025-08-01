@@ -10,7 +10,7 @@ Help users create meals using ingredients they already have.
 
 Eliminate the need for traditional search-based recipe hunting.
 
-Enable users to save, view, and reuse recipes.
+Enable users to view, and reuse recipes.
 
 Provide seamless login via magic links (no password hassle).
 
@@ -32,7 +32,7 @@ Secure and easy access for users.
 
 ### 2. Ingredient Input
 
-Users can input ingredients into a textbox or tag-style input UI.
+Users can input ingredients into a textbox input UI.
 
 ### 3. Recipe Generation
 
